@@ -7,8 +7,11 @@ const jwt = require('../utils/jwt');
 const prisma = new PrismaClient()
 
 
-
+/*
+* REGISTER NEW USER (ADMINS ONLY)
+*/
 router.post('/register', authMiddleware,  async (req, res, next) => {
+
     try {
         const data = req.body;
         data.password = bcrypt.hashSync(data.password, 8);
@@ -22,8 +25,10 @@ router.post('/register', authMiddleware,  async (req, res, next) => {
     }
 })
 
-
-router.post('/login', authMiddleware, async (req, res, next) => {
+/*
+* USER LOGIN
+*/
+router.post('/login', async (req, res, next) => {
     try {
         const data = req.body;
         const { email, password } = data;
@@ -47,19 +52,24 @@ router.post('/login', authMiddleware, async (req, res, next) => {
     
 });
 
-
-
-
+/*
+* GET ALL USERS
+*/
 router.get('/users', authMiddleware, async (req, res, next) => {
+
     try {
         const users = await prisma.user.findMany({select: {name : true, email: true}})
         res.json(users)
-        
+            
     } catch (error) {
         next(error)
     }
+     
 })
 
+/*
+* GET POSTS
+*/
 router.get('/posts', authMiddleware, async (req, res, next) => {
     try {
         const posts = await prisma.post.findMany({include: {User : true}})
@@ -70,6 +80,9 @@ router.get('/posts', authMiddleware, async (req, res, next) => {
     }
 })
 
+/*
+* GET POST BY ID
+*/
 router.get('/posts/:id', authMiddleware, async (req, res, next) => {
     try {
         const {id} = req.params
@@ -78,36 +91,73 @@ router.get('/posts/:id', authMiddleware, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+
 })
 
+/*
+* CREATE POST (ADMINS ONLY)
+*/
 router.post('/posts', authMiddleware, async (req, res, next) => {
-    try {
-        const createdPost = await prisma.post.create({data: req.body})
-        res.json(createdPost)
-        
-    } catch (error) {
-        next(error)
+
+    if(req.user.payload.roleId == 1)
+    {
+        try {
+            const createdPost = await prisma.post.create({data: req.body})
+            res.json(createdPost)
+            
+        } catch (error) {
+            next(error)
+        }
     }
+    else{
+
+        res.json(createError.Unauthorized("Method not Allowed"))
+    }
+      
 })
 
+/*
+* UPDATE POST (ADMINS ONLY)
+*/
 router.patch('/posts/:id', authMiddleware, async (req, res, next) => {
-    try {
-        const {id} = req.params
-        const updatedPost = await prisma.post.update({where:{ id: Number(id)}, data: req.body, include: {User : true}}) 
-        res.json(updatedPost)
-    } catch (error) {
-        next(error)
+
+    if(req.user.payload.roleId == 1)
+    {
+        try {
+            const {id} = req.params
+            const updatedPost = await prisma.post.update({where:{ id: Number(id)}, data: req.body, include: {User : true}}) 
+            res.json(updatedPost)
+        } catch (error) {
+            next(error)
+        }
     }
+    else{
+
+        res.json(createError.Unauthorized("Method not Allowed"))
+    }
+
 })
 
+/*
+* DELETE POST (ADMINS ONLY)
+*/
 router.delete('/posts/:id', authMiddleware, async (req, res, next) => {
-    try {
-        const {id} = req.params
-        const deletedPost = await prisma.post.delete({where:{ id: Number(id)}, include: {User : true}}) 
-        res.json(deletedPost)
-    } catch (error) {
-        next(error)
+
+    if(req.user.payload.roleId == 1)
+    {
+        try {
+            const {id} = req.params
+            const deletedPost = await prisma.post.delete({where:{ id: Number(id)}, include: {User : true}}) 
+            res.json(deletedPost)
+        } catch (error) {
+            next(error)
+        }
     }
+    else{
+
+        res.json(createError.Unauthorized("Method not Allowed"))
+    }
+ 
 })
 
 
