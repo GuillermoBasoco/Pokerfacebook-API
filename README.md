@@ -42,7 +42,7 @@ You can visualize and edit the DB using Prisma Studio, open it in your browser w
 npx prisma studio
 ```
 
-YOU MUST OBTAIN THE BEARER TOKEN LOGGING TO START USING THE ROUTES:
+YOU MUST OBTAIN THE BEARER TOKEN LOGGING IN TO START USING THE ROUTES:
 
 ### User Login  [POST] (Returns jwt Auth Token)
 [http://localhost:3000/api/login](http://localhost:3000/api/login)
