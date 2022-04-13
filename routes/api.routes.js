@@ -74,6 +74,7 @@ router.get('/users', authMiddleware, async (req, res, next) => {
 router.get('/posts', authMiddleware, async (req, res, next) => {
     try {
         const posts = await prisma.post.findMany({include: {User : true}})
+        await prisma.post.updateMany({data: {views: {increment: 1}}})
         res.json(posts)
         
     } catch (error) {
