@@ -25,8 +25,8 @@ then, create a .env file in the root folder of the project, you can use the foll
 *NOTE*: sslaccept=accept_invalid_certs parameter required to test without SSL.
 
 ```env
-DATABASE_URL='mysql://dsj5hykbsqj7:pscale_pw_xEvhkfUb65inQ6s6u1hQoLpK4ACVXn3ulWlPn68T9EA@602226y6l5ii.us-east-4.psdb.cloud/pokerfacebookdb?sslaccept=accept_invalid_certs'
-SHADOW_DATABASE_URL='mysql://nrlg7usdmfg2:pscale_pw_2NBfVtC7wOI11vwbqrJcYhyKeiwk8b6lVKB7YOOPBgI@x3te3iypw2mo.us-east-3.psdb.cloud/pokerfacebook-shadowdb?sslaccept=accept_invalid_certs'
+DATABASE_URL='DATABASE-URL'
+SHADOW_DATABASE_URL='SHADOW-DATABASE-URL'
 PORT=3000
 ACCESS_TOKEN_SECRET='accessToken'
 ```
