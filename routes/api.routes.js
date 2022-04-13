@@ -58,13 +58,14 @@ router.post('/login', async (req, res, next) => {
 router.get('/users', authMiddleware, async (req, res, next) => {
 
     try {
+        // SHOW ONLY NAME AND EMAIL DATA
         const users = await prisma.user.findMany({select: {name : true, email: true}})
         res.json(users)
             
     } catch (error) {
         next(error)
     }
-     
+
 })
 
 /*
