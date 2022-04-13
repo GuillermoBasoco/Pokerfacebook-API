@@ -42,6 +42,17 @@ You can visualize and edit the DB using Prisma Studio, open it in your browser w
 npx prisma studio
 ```
 
+YOU MUST OBTAIN THE BEARER TOKEN LOGGING TO START USING THE ROUTES:
+
+### User Login  [POST] (Returns jwt Auth Token)
+[http://localhost:3000/api/login](http://localhost:3000/api/login)
+```json
+{
+	"email" : "guillo@guillo.com",
+	"password" : "password"
+}
+```
+
 ### Create New User (Admins Only)  [POST]
 [http://localhost:3000/api/register](http://localhost:3000/api/register)
 ```json
@@ -53,14 +64,6 @@ npx prisma studio
 }
 ```
 
-### User Login  [POST] 
-[http://localhost:3000/api/login](http://localhost:3000/api/login)
-```json
-{
-	"email" : "guillo@guillo.com",
-	"password" : "password"
-}
-```
 
 ### Get All Users (Just name & email)  [GET]
 [http://localhost:3000/api/users](http://localhost:3000/api/users)
