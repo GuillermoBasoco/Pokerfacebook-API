@@ -21,6 +21,7 @@ yarn install
 then, create a .env file in the root folder of the project, you can use the following test Planetscale DB to start using the API immediately:
 
 *NOTE*: The project uses *Prisma Migrate*, a Shadow Database is required.
+<br/>
 *NOTE*: sslaccept=accept_invalid_certs parameter required to test without SSL.
 
 ```env
