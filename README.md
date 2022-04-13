@@ -21,6 +21,7 @@ yarn install
 then, create a .env file in the root folder of the project, you can use the following test Planetscale DB to start using the API immediately:
 
 *NOTE*: The project uses *Prisma Migrate*, a Shadow Database is required.
+*NOTE*: sslaccept=accept_invalid_certs parameter required to test without SSL.
 
 ```env
 DATABASE_URL='mysql://dsj5hykbsqj7:pscale_pw_xEvhkfUb65inQ6s6u1hQoLpK4ACVXn3ulWlPn68T9EA@602226y6l5ii.us-east-4.psdb.cloud/pokerfacebookdb?sslaccept=accept_invalid_certs'
